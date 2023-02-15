@@ -1,10 +1,9 @@
 :root {
-  --clr-dark: hsl(0, 0%, 15%);
+  --clr-dark: hsl(0, 0%, 20%);
   --clr-light: hsl(0, 0%, 90%);
   --clr-alert: hsl(347, 94%, 61%);
   --clr-purple: hsl(256, 66%, 56%);
   --clr-highlight: hsl(47, 100%, 50%);
-  --clr-transparent: rgba(0, 0, 0, 0.75);
 }
 
 html,
@@ -26,9 +25,7 @@ html {
 
 img {
   display: block;
-  width: 100%;
   max-width: 100%;
-  object-fit: cover;
 }
 
 button {
@@ -73,6 +70,12 @@ p {
   text-decoration: none;
   padding: 0.5em 1em;
   background-color: var(--clr-highlight);
+  transition: all 0.35s ease;
+}
+
+.menu__item:hover {
+  cursor: pointer;
+  opacity: 0.75;
 }
 
 .icon {
@@ -86,7 +89,7 @@ p {
 }
 
 .feature__text {
-  color: var(--clr-transparent);
+  color: var(--clr-dark);
 }
 
 .gallery__title {
@@ -130,7 +133,7 @@ body {
 
 .wrapper {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
   margin-block-start: 3rem;
 }
 
@@ -162,6 +165,12 @@ body {
   place-items: center;
   place-content: center;
   background-color: var(--clr-highlight);
+  transition: all 0.35s ease;
+}
+
+.cta:hover {
+  cursor: pointer;
+  opacity: 0.75;
 }
 
 .ct1 {
@@ -182,7 +191,7 @@ body {
 
 .menu__list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
   list-style: none;
   padding: 0;
@@ -203,7 +212,7 @@ body {
   text-align: center;
   padding: 0.65rem;
   background-color: var(--clr-light);
-  box-shadow: 0 0 4px 0 var(--clr-transparent);
+  box-shadow: 0 0 4px 0 var(--clr-dark);
 }
 
 /* =============
@@ -220,7 +229,7 @@ body {
 }
 
 /* =============
-  ABOUT
+  Gallery
 ============== */
 
 .gallery {
@@ -228,4 +237,98 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(294px, 1fr));
   gap: 0.5rem;
   margin-block-end: 3rem;
+}
+
+.gallery__img {
+  width: 100%;
+  object-fit: cover;
+  transition: all 0.35s ease;
+}
+
+.gallery__img:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0.5rem 0 var(--clr-dark);
+}
+
+/* ==================
+  RESPONSIVENESS
+================== */
+
+@media (width <= 1000px) {
+  .menu {
+    order: -1;
+    overflow: hidden;
+    perspective: 800px;
+  }
+
+  .menu__list {
+    max-height: 0;
+    transform: rotateX(90deg);
+    transition: all 0.35s ease;
+  }
+
+  [aria-controls="menu__list"] {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: baseline;
+    width: 80px;
+    margin-block-start: 0;
+  }
+
+  [aria-expanded="true"] ~ .menu__list {
+    max-height: 500px;
+    transform: rotateX(0deg);
+  }
+
+  [aria-expanded="true"] .open {
+    display: none;
+  }
+
+  [aria-expanded="false"] .close {
+    display: none;
+  }
+}
+
+@media (width <= 700px) {
+  .top {
+    grid-template-areas:
+      "hero hero"
+      "cta1 cta2";
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (width <= 500px) {
+  .top {
+    grid-template-areas:
+      "hero"
+      "cta1"
+      "cta2";
+  }
+}
+
+/* ==================
+  SCROLLBAR
+================== */
+
+::-webkit-scrollbar {
+  width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--clr-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  border-inline: 4px solid var(--clr-dark);
+  background-color: var(--clr-light);
+}
+
+@supports (scrollbar-color: var(--clr-dark) var(--clr-light)) {
+  * {
+    scrollbar-color: var(--clr-dark) var(--clr-light);
+  }
 }
